@@ -17,31 +17,33 @@
 
 		/* We need a initialized js function to load the map. This function contains everything that will happen after the page loads, but before the user interacts with the map */
 
-		function initMap() {
-			//Constructor creates a new map - only center and zoom are required.
-			map = new google.maps.Map(document.getElementById('map'), {
-				//lat long literal
-				center: {lat: 40.7413549, lng: -73.9980244},
-				//max zoom is 21
-				zoom: 13
-			});
+     function initMap() {
+	       map = new google.maps.Map(document.getElementById('map'), {
+	         center: {lat: 40.74135, lng: -73.99802},
+	         zoom: 14
+	       });
+	       
+	       var singleLatLng = {lat: 40.74135, lng: -73.99802};
+	       var marker = new google.maps.Marker({
+	        position: singleLatLng,
+	        map: map,
+	        title: 'Tester'
+	       });
+	      
+	       var infowindow = new google.maps.InfoWindow({
+	        content: 'Testing'
+	       });
+	   
+	      marker.addListener('click', function() {
+	        infowindow.open(map, marker);
+	      });
 
-			var tribeca = {lat: 40.7413549, lng: -73.9980244};
-			var marker = new google.maps.Marker({
-				position: tribeca,
-				map: map,
-				title: 'First Marker!'
-			});
-
-			var infowindow = new google.maps.InfoWindow({
-				content: 'yasss a window!' + ''
-			})
-		};
+			}
 	</script>
 
-	<script async defer 
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_-FCSZj83ZLglwBo-bYpk7uhTrty44po&v=3&callback=initMap"></script>
-
+	<script async defer
+     src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCVNNE9FZK9fjTgF7DMV1PHjKPwQEt0LxU&callback=initMap">
+   </script>
 </head>
 
 	<body>
