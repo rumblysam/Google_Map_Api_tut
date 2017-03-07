@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+		<title>Snazzy Maps - Info Window Test</title>
+
+		<link rel="stylesheet" type="text/css" href="./css/snazzy-info-window.min.css">
+		<style type="text/css">
+			html {
+				height: 100%;
+			}
+
+			body {
+				height: 100%;
+				margin: 0;
+			}
+
+			.map-canvas {
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+	
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js"></script>
+		<script src="./scripts/snazzy-info-window.min.js"></script>
+		<script src="./scripts/index.js"></script>
+
+	</head>
+	<body>
+		<div class="map-canvas">
+		</div>
+
+		<script type="text/javascript">
+			$(function() {
+				var map = new google.maps.Map($(".map-canvas")[0], {
+					zoom: 14,
+					center: new google.maps.LatLng(40.72, -74),
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				});
+
+				var marker = new google.maps.Marker({
+					map: map,
+					draggable: true,
+					position: new google.maps.LatLng(40.72, -74),
+					visible: true
+				});
+
+				var infowindow = new SnazzyInfoWindow({
+					marker: marker,
+					position: 'top',
+					//content: 'Testing',
+					content: '<div><h1>Snazzy Info Windows</h1><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ex ipsum, porta ut felis sit amet, porttitor laoreet neque. Maecenas vel lacinia quam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ex ipsum, porta ut felis sit amet, porttitor laoreet neque. Maecenas vel lacinia quam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ex ipsum, porta ut felis sit amet, porttitor laoreet neque. Maecenas vel lacinia quam.</p></div>',
+					maxWidth: 400,
+					maxHeight: 200
+				});
+
+				window.info = infowindow;
+				info.open();
+			});
+
+			marker.addListener('click', function() {
+        infowindow.open(map, marker);
+      });
+		</script>
+	</body>
+</html>
